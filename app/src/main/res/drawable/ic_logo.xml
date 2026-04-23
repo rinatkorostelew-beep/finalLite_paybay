@@ -4,32 +4,60 @@
     android:height="48dp"
     android:viewportWidth="48"
     android:viewportHeight="48">
-    <!-- Outer ring -->
-    <path android:fillColor="#00000000"
+    
+    <!-- Внешнее кольцо -->
+    <path
+        android:fillColor="#00000000"
         android:strokeColor="#FFFFFF"
         android:strokeWidth="2.5"
         android:pathData="M24,4 A20,20 0 1,1 23.999,4 Z"/>
-    <!-- Middle ring -->
-    <path android:fillColor="#00000000"
+    
+    <!-- Среднее кольцо -->
+    <path
+        android:fillColor="#00000000"
         android:strokeColor="#FFFFFF"
         android:strokeWidth="1.5"
         android:strokeAlpha="0.6"
         android:pathData="M24,11 A13,13 0 1,1 23.999,11 Z"/>
-    <!-- Inner ring -->
-    <path android:fillColor="#00000000"
+    
+    <!-- Внутреннее кольцо -->
+    <path
+        android:fillColor="#00000000"
         android:strokeColor="#FFFFFF"
         android:strokeWidth="1.2"
         android:strokeAlpha="0.4"
         android:pathData="M24,17 A7,7 0 1,1 23.999,17 Z"/>
-    <!-- Center dot -->
-    <circle android:fillColor="#FFFFFF" android:cx="24" android:cy="24" android:r="2.5"/>
-    <!-- Cross lines -->
-    <line android:strokeColor="#FFFFFF" android:strokeWidth="1.5" android:strokeAlpha="0.7"
-        android:x1="24" android:y1="2" android:x2="24" android:y2="10"/>
-    <line android:strokeColor="#FFFFFF" android:strokeWidth="1.5" android:strokeAlpha="0.7"
-        android:x1="24" android:y1="38" android:x2="24" android:y2="46"/>
-    <line android:strokeColor="#FFFFFF" android:strokeWidth="1.5" android:strokeAlpha="0.7"
-        android:x1="2" android:y1="24" android:x2="10" android:y2="24"/>
-    <line android:strokeColor="#FFFFFF" android:strokeWidth="1.5" android:strokeAlpha="0.7"
-        android:x1="38" android:y1="24" android:x2="46" android:y2="24"/>
+    
+    <!-- Центральная точка (маленький круг) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,21.5 A2.5,2.5 0 1,1 23.999,21.5 Z"/>
+    
+    <!-- Вертикальная линия сверху -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.7"
+        android:pathData="M24,2 L24,10"/>
+    
+    <!-- Вертикальная линия снизу -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.7"
+        android:pathData="M24,38 L24,46"/>
+    
+    <!-- Горизонтальная линия слева -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.7"
+        android:pathData="M2,24 L10,24"/>
+    
+    <!-- Горизонтальная линия справа -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.7"
+        android:pathData="M38,24 L46,24"/>
 </vector>
