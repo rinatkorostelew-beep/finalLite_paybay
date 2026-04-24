@@ -49,30 +49,33 @@
             android:id="@+id/tvMainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="𝗕𝗜𝗚𝗛𝗘𝗔𝗗"
+            android:text="BIGHEAD"
             android:textColor="@color/white"
             android:textSize="36sp"
             android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
             android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/tvMainSub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="𝗦𝗼𝗳𝘁𝘄𝗮𝗿𝗲 | 𝗡𝗼 𝗥𝗼𝗼𝘁"
+            android:text="Software | No Root"
             android:textColor="@color/text_secondary"
             android:textSize="13sp"
             android:gravity="center"
+            android:fontFamily="sans-serif-medium"
             android:layout_marginBottom="48dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLaunch"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:text="𝗜𝗡𝗝𝗘𝗖𝗧"
+            android:text="INJECT"
             android:textSize="15sp"
-            android:letterSpacing="0.1"
+            android:letterSpacing="0.12"
             android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
             app:backgroundTint="@color/accent_purple"
             app:cornerRadius="18dp"
             android:layout_marginBottom="14dp"/>
