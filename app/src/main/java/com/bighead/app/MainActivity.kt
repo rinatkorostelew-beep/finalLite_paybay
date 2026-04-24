@@ -113,14 +113,38 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchGame(packageName: String) {
         try {
-            val intent = packageManager.getLaunchIntentForPackage(packageName)
-            if (intent != null) {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-                toast("Запуск Standoff 2...")
-            } else {
-                toast("Standoff 2 не установлен")
+            // Способ 1: стандартный launcher intent
+            var intent = packageManager.getLaunchIntentForPackage(packageName)
+            
+            // Способ 2: если не сработало, пробуем через главную Activity Unity
+            if (intent == null) {
+                try {
+                    intent = Intent(Intent.ACTION_MAIN)
+                    intent.setClassName(packageName, "com.google.firebase.MessagingUnityPlayerActivity")
+                    intent.addCategory(Intent.CATEGORY_LAUNCHER)
+                } catch (_: Exception) {}
             }
+            
+            // Способ 3: через имя пакета напрямую (дубль-проверка)
+            if (intent == null) {
+                val pm = packageManager
+                val launchIntent = pm.getLaunchIntentForPackage(packageName)
+                if (launchIntent != null) {
+                    intent = launchIntent
+                }
+            }
+            
+            // Способ 4: если ничего не помогло — открыть страницу в Play Market
+            if (intent == null) {
+                toast("Standoff 2 не найден. Открываю Play Market...")
+                intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
+            }
+            
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or 
+                            Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
+            startActivity(intent)
+            toast("Запуск Standoff 2...")
+            
         } catch (e: Exception) {
             toast("Ошибка запуска: ${e.message}")
         }
