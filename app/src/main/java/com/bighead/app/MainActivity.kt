@@ -3,7 +3,6 @@ package com.bighead.app
 import android.app.ActivityManager
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -44,15 +43,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshBtn() {
-        b.btnLaunch.text = if (running()) "ОСТАНОВИТЬ ОВЕРЛЕЙ" else "ЗАПУСТИТЬ ОВЕРЛЕЙ"
+        b.btnLaunch.text = if (running()) "ОСТАНОВИТЬ ИНЖЕКТ" else "INJECT"
     }
 
     private fun onLaunchClick() {
         bounce(b.btnLaunch)
         when {
-            running() -> { OverlayService.stop(this); refreshBtn() }
+            running() -> {
+                OverlayService.stop(this)
+                refreshBtn()
+            }
             !hasOverlayPerm() -> askOverlayPerm()
-            else -> launch()
+            else -> {
+                launchGame("com.axlebolt.standoff2")
+                b.btnLaunch.postDelayed({
+                    launch()
+                }, 1500)
+            }
         }
     }
 
@@ -83,8 +90,14 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQ) {
-            if (hasOverlayPerm()) launch()
-            else toast("Разрешение не выдано — оверлей недоступен")
+            if (hasOverlayPerm()) {
+                launchGame("com.axlebolt.standoff2")
+                b.btnLaunch.postDelayed({
+                    launch()
+                }, 1500)
+            } else {
+                toast("Разрешение не выдано — оверлей недоступен")
+            }
             refreshBtn()
         }
     }
@@ -95,6 +108,21 @@ class MainActivity : AppCompatActivity() {
             refreshBtn()
         } catch (e: Exception) {
             toast("Ошибка: ${e.message}")
+        }
+    }
+
+    private fun launchGame(packageName: String) {
+        try {
+            val intent = packageManager.getLaunchIntentForPackage(packageName)
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                toast("Запуск Standoff 2...")
+            } else {
+                toast("Standoff 2 не установлен")
+            }
+        } catch (e: Exception) {
+            toast("Ошибка запуска: ${e.message}")
         }
     }
 
